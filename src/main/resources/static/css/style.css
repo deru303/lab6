@@ -1,0 +1,21 @@
+* {
+    font-family: sans-serif;
+}
+
+table, td, tr {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+thead {
+    font-weight: bold;
+}
+
+td {
+    padding: 5px;
+}
+
+.error {
+    color: darkred;
+    margin-bottom: 18px;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en-UK">
+<head>
+    <title>Notepad</title>
+    <meta charset="UTF-8" />
+
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+    <section id="section-add-note">
+        <h1>Add your note:</h1>
+
+        <form method="post" th:action="@{/note}" th:object="${note}">
+            <div th:if="${#fields.hasAnyErrors()}" class="error">Wypełnij wszystkie pola!</div>
+
+            <div>
+                <label for="input-importance">Importance:</label>
+                <select th:field="*{importance}" id="input-importance">
+                    <option th:each="imp : ${T(com.github.danrog303.notepad.domain.importance.Importance).values()}"
+                            th:value="${imp}"
+                            th:text="${imp}" />
+                </select>
+            </div>
+
+            <div>
+                <label for="input-note">Your note:</label>
+                <input type="text" th:field="*{text}" id="input-note">
+            </div>
+
+            <div>
+                <input type="submit" value="Add" />
+            </div>
+        </form>
+    </section>
+
+    <section id="section-display-notes">
+        <h1>The list of your notes:</h1>
+        <table>
+            <thead>
+                <tr>
+                    <td>Importance</td>
+                    <td>Timestamp</td>
+                    <td>Note</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="existingNote: ${existingNotes}">
+                    <td th:text="${existingNote.importance}" />
+                    <td th:text="${existingNote.timestamp}" />
+                    <td th:text="${existingNote.text}" />
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</body>
+</html>
